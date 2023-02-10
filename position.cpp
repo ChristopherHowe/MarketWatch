@@ -9,7 +9,7 @@ Position::Position(){
 
 Position::Position(float newOPPS, float newCPPS, float newNumShares, string newSymbol, string newType, time_t newDate){
     originalPricePerShare = newOPPS;
-    currentPricePerShare = newCPPS;
+    price = newCPPS;
     numShares = newNumShares;
     symbol = newSymbol;
     type = newType;
@@ -20,16 +20,8 @@ float Position::getOPPS(){
     return originalPricePerShare;
 }
 
-float Position::getCPPS(){
-    return currentPricePerShare;
-}
-
 float Position::getNumShares(){
-
-}
-
-string Position::getSymbol(){
-    return symbol;
+    return numShares;
 }
 
 string Position::getType(){
@@ -40,34 +32,15 @@ time_t Position::getDate(){
     return date;
 }
 
-
 float Position::getValue(){
-    return numShares * currentPricePerShare;
+    return numShares * price;
 }
 
 float Position::getOriginalValue(){
     return numShares * originalPricePerShare;
 }
 
-
-void Position::setOPPS(float newOPPS){
-    originalPricePerShare = newOPPS;
-}
-
-void Position::setCPPS(float newCPPS){
-    currentPricePerShare = newCPPS;
-}
-
-void Position::setNumShares(float newNumShares){
-    numShares = newNumShares;
-}
-
-void Position::setSymbol(string newSymbol){
-    symbol = newSymbol;
-}
-
-void Position::setType(string newType){
-    type = newType
-}
-
+void Position::setOPPS(float newOPPS) : originalPricePerShare(newOPPS);
+void Position::setNumShares(float newNumShares) : numShare(newNumShares);
+void Position::setType(string newType) : type(newType);
 void Position::setDate(time_t newDate) : date(newDate);

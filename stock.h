@@ -6,6 +6,7 @@ import <iostream>
 using namespace std
 
 class Stock {
+    protected:
     string symbol;
     float price;
 

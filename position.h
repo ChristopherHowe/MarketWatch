@@ -3,15 +3,13 @@
 
 #include <iostream>
 #include <ctime>
+#include "stock.h"
 
 using namespace std;
 
-class Position {
+class Position : public Stock {
     float originalPricePerShare;
-    float currentPricePerShare;
     float numShares;
-    
-    string symbol;
     string type;
     time_t date;
     
@@ -19,10 +17,8 @@ class Position {
     Position();
     Position(float, float, float, string, string, time_t);
 
-    float getOPPS();
     float getCPPS();
     float getNumShares();
-    string getSymbol();
     string getType();
     time_t getDate();
 
@@ -30,9 +26,7 @@ class Position {
     float getOriginalValue();
 
     void setOPPS(float);
-    void setCPPS(float);
     void setNumShares(float);
-    void getSymbol(string);
     void setType(string);
     void getDate(time_t);
 }
