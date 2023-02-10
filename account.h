@@ -16,9 +16,9 @@ class Account {
     string owner;
 
     void refreshAccount();
-    void 
 
     public::   
+    //contstructors
     Account();
     Account(Position[],int, float, string);
 
