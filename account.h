@@ -3,8 +3,6 @@
 
 #include <iostream>
 #include "position.h"
-#include "finance.h"
-
 
 #define MAX_POSITIONS 100
  
@@ -35,4 +33,8 @@ class Account {
     void setPositionArray(Position[], int);
     void setOwner(string);
     void setCash(float);
+
+    //position array manipulators
+    void addPosition(Position);
+    void removePosition(int);
 }

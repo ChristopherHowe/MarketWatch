@@ -1,4 +1,4 @@
-import "market.h"
+#include "market.h"
 
 Market::Market(){
     numStocks = 0;
@@ -13,6 +13,10 @@ Market::Market(Stock newStocks[], newNumStocks){
 
 Stock[] Market::getStocks(){
     return stocks;
+}
+
+int Market::getNumStocks(){
+    return numStocks;
 }
 
 Stock Market::getStockBySymbol(string symbol){

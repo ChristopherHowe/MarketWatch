@@ -1,4 +1,4 @@
-import "position.h"
+#include "position.h"
 
 Position::Position(){
     originalPricePerShare = 0;

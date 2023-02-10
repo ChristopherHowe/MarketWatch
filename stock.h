@@ -1,7 +1,7 @@
 #ifndef STOCK_H
 #define STOCK_H
 
-import <iostream>
+#include <iostream>
 
 using namespace std
 

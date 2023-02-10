@@ -1,4 +1,4 @@
-#inlude "stock.h"
+#include "stock.h"
 
 Stock::Stock(){
     symbol = "default stock"

@@ -20,13 +20,26 @@ float Account::getOriginalPositionTotal(){
     return total;
 }
 
+void Account::addPosition(Position newPosition){
+    positions[numPositions] = newPosition;
+    numPositions++;
+}
+
+void Account::removePosition(int index){
+    for(int i = index; i< numPositions; i++){
+        positions[i]=positions[i+1];
+    }
+    numPositions--;
+}
+
+//constructors
 Account::Account(){
     numPositions = 0;
     cash = 0;
     accountValue = 0;
     owner = "default owner";
 }
-Account::Account(Position[] newArray, int newNum, float newCash string newOwner){
+Account::Account(Position[] newArray, int newNum, float newCash, string newOwner){
     for(int i = 0; i< newNum; i++){
         positions[i]=newArray[i];
     }
