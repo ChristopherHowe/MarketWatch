@@ -1,16 +1,23 @@
 #include "account.h"
 
 void Account::refreshAccount(){
-    
+    accountValue = getPositionTotal();
 }
 
 float Account::getPositionTotal(){
     float total = 0;
-    for (int i = 0; i < numPositions; i++)
+    for (int i = 0; i < numPositions; i++){
+        total += positionArray[i].getValue();
+    }
+    return total;
 }
 
 float Account::getOriginalPositionTotal(){
-
+    float total = 0;
+    for (int i = 0; i < numPositions; i++){
+        total += positionArray[i].getOriginalValue();
+    }
+    return total;
 }
 
 Account::Account(){
@@ -54,6 +61,13 @@ void Account::setPositionArray(Position[] newArray, int newNum){
         positions[i] = newArray[i];
     }
     numPositions = newNum;
+    refreshAccount()
 }
-void Account::setOwner(string newOwner) : owner(newOwner);
-void Account::setCash(float newCash) : cash(newCash);
+void Account::setOwner(string newOwner){
+    owner = newOwner;
+    refreshAccount();
+}
+void Account::setCash(float newCash){
+    cash = newCash;
+    refreshAccount();
+}
