@@ -16,13 +16,14 @@ class User {
     User(Account[], int newNumAccounts);
 
     Account[] getAccounts();
+    Account[] getAccount(int);
     int getNumAccounts();
     float getBalance();
     
     Account addAccount(Account);
     Account removeAccount(int accountIndex);
 
-    Position* purchasePosition(Position, int accountIndex);
+    Position* purchasePosition(Stock,int numShares, int accountIndex);
     float sellPosition(int positionIndex, int accountIndex);
 }
 

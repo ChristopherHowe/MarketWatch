@@ -1,6 +1,7 @@
 #include "user.h"
 
-Position* User::purchasePosition(Position newPosition, int accountIndex){
+Position* User::purchasePosition(Stock stock, int numShares, int accountIndex){
+    Position newPosition(stock.getPrice(), stock.getPrice(), numShares, stock.getSymbol(), "buy", time(NULL))
     float c = accounts[accountIndex].getCash();
     float p = newPosition.getValue();
     if (c >= p){
@@ -21,7 +22,6 @@ float User::sellPosition(int positionIndex, int accountIndex){
 
 }
 
-
 //constructors
 User::User(){
     balance = 0;
@@ -40,6 +40,9 @@ User::User(Account newAccounts[], int newNumAccounts, float newBalance){
 //getters
 Account[] User::getAccounts(){
     return accounts;
+}
+Account User::getAccount(int index){
+    return accounts[index];
 }
 
 int User::getNumAccounts(){
