@@ -1,0 +1,6 @@
+template <class ItemType>
+bool LinkedList<ItemType>::LinkedList(const LinkedList& rhs){
+    ItemType* curptr = rhs.headptr
+    for(curptr->getNext() != null){
+        next = new Node()
+        curptr = curpt

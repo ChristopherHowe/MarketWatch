@@ -18,3 +18,6 @@ account.o: account.cpp account.h
 
 user.o: user.cpp user.h
 	g++ -c user.cpp
+
+clean:
+	rm *.o marketwatch

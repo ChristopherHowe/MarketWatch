@@ -15,7 +15,5 @@ class Market {
     Stock getStockBySymbol(string)
 
     void addStock(Stock);
-    void addStocks(Stock[], int);
-
-
+    void updateStocks(Stock[], int);
 }

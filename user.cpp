@@ -1,12 +1,18 @@
 #include "user.h"
 
-Position* User::purchasePosition(Stock stock, int numShares, int accountIndex){
+void User::setActiveAccount(int AccountIndex){
+    if (AccountIndex < numAccounts && AccountIndex > 0){
+        activeAccount = AccountIndex;
+    }
+}
+
+Position* User::purchasePosition(Stock stock, int numShares){
     Position newPosition(stock.getPrice(), stock.getPrice(), numShares, stock.getSymbol(), "buy", time(NULL))
-    float c = accounts[accountIndex].getCash();
+    float c = accounts[activeAccount].getCash();
     float p = newPosition.getValue();
     if (c >= p){
-        accounts[accountIndex].addPosition(newPosition);
-        account[accountIndex].setCash(c - p)
+        accounts[activeAccount].addPosition(newPosition);
+        account[activeAccount].setCash(c - p)
         return &newPosition;
     }
     else{
@@ -14,17 +20,16 @@ Position* User::purchasePosition(Stock stock, int numShares, int accountIndex){
     }
 } 
 
-float User::sellPosition(int positionIndex, int accountIndex){
-    float p = accounts[accountIndex].getPositionArray()[positionIndex].getValue();
-    float c = accounts(accountIndex).getCash();
-    accounts[accountIndex].removePosition(positionIndex);
-    accounts[accountIndex].setCash(c + p);
+float User::sellPosition(int positionIndex){
+    float p = accounts[activeAccount].getPositionArray()[positionIndex].getValue();
+    float c = accounts(activeAccount).getCash();
+    accounts[activeACcount].removePosition(positionIndex);
+    accounts[activeAccount].setCash(c + p);
 
 }
 
 //constructors
 User::User(){
-    balance = 0;
     numAccounts = 1;
     accounts[0] = Account({}, 0, 0, "default owner");
 }
@@ -34,7 +39,6 @@ User::User(Account newAccounts[], int newNumAccounts, float newBalance){
         accounts[i] = newAccounts[i];
     }
     numAccounts = newNumAccounts;
-    balance = newBalance;
 }
 
 //getters
@@ -45,11 +49,19 @@ Account User::getAccount(int index){
     return accounts[index];
 }
 
+Account User::getActiveAccount(){
+    return accounts[activeAccount];
+}
+
 int User::getNumAccounts(){
     return numAccounts;
 }
 
 float User::getBalance(){
+    float balance;
+    for(int i = 0; i < numAccounts; i++){
+        balance += accounts[i].getAccountValue();
+    }
     return balance;
 }
 

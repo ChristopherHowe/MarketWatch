@@ -25,7 +25,7 @@ Stock Market::getStockBySymbol(string symbol){
             return stocks[i];
         }
     }
-    throw("stock not found");
+    throw "stock not found";
 }
 
 void Market::addStock(Stock newStock){
@@ -34,13 +34,21 @@ void Market::addStock(Stock newStock){
         if (newStock.getSymbol() = stocks[i].getSymbol()){
             stocks[i].setPrice(newStock.getPrice());
         }
-        if(stocks[i].getSymbol() < newStock.getSymbol()){
-            continue
-        }
-        else{
-            
+        else(stocks[i].getSymbol() != newStock.getSymbol()){
+            stocks[numStocks] = newStock;
+            numStocks++;
         }
    }
 }
 
-
+void Market::updateStocks(Stock[] newStocks, int numNewStocks){
+    Stock notUpdated[];
+    int numNotUpdated;
+    for(int i = 0; i < numStocks; i++){
+        bool exists;
+        for(int x = 0; x < newNumStocks; x++){
+            if(stocks[i].getSymbol() == newStocks[x].getSymbol()){
+                stocks
+            }
+        }
+}
