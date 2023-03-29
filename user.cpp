@@ -1,31 +1,38 @@
 #include "user.h"
 
-void User::setActiveAccount(int AccountIndex){
+void User::changeActiveAccount(int AccountIndex){
     if (AccountIndex < numAccounts && AccountIndex > 0){
         activeAccount = AccountIndex;
     }
 }
 
-Position* User::purchasePosition(Stock stock, int numShares){
-    Position newPosition(stock.getPrice(), stock.getPrice(), numShares, stock.getSymbol(), "buy", time(NULL))
+Position User::purchasePosition(Stock stock, float numShares){
+    Position newPosition(
+        stock.getPrice(),
+        stock.getPrice(),
+        numShares, 
+        stock.getSymbol(),
+        "buy",
+        time(NULL));
+
     float c = accounts[activeAccount].getCash();
     float p = newPosition.getValue();
     if (c >= p){
         accounts[activeAccount].addPosition(newPosition);
-        account[activeAccount].setCash(c - p)
-        return &newPosition;
+        accounts[activeAccount].setCash(c - p);
+        return newPosition;
     }
     else{
-        return null;
+        return Position();
     }
 } 
 
 float User::sellPosition(int positionIndex){
     float p = accounts[activeAccount].getPositionArray()[positionIndex].getValue();
-    float c = accounts(activeAccount).getCash();
-    accounts[activeACcount].removePosition(positionIndex);
+    float c = accounts[activeAccount].getCash();
+    accounts[activeAccount].removePosition(positionIndex);
     accounts[activeAccount].setCash(c + p);
-
+    return p;
 }
 
 //constructors
@@ -34,7 +41,7 @@ User::User(){
     accounts[0] = Account({}, 0, 0, "default owner");
 }
 
-User::User(Account newAccounts[], int newNumAccounts, float newBalance){
+User::User(Account* newAccounts, int newNumAccounts){
     for(int i = 0; i < newNumAccounts; i++){
         accounts[i] = newAccounts[i];
     }
@@ -42,7 +49,7 @@ User::User(Account newAccounts[], int newNumAccounts, float newBalance){
 }
 
 //getters
-Account[] User::getAccounts(){
+Account* User::getAccounts(){
     return accounts;
 }
 Account User::getAccount(int index){
@@ -66,14 +73,24 @@ float User::getBalance(){
 }
 
 
-Account User::addAccount(Account newAccount){
-    accounts[numAccounts] = newAccount;
-    numAccounts++;
+void User::addAccount(Account newAccount){
+    if(numAccounts < MAX_ACCOUNTS){
+        accounts[numAccounts] = newAccount;
+        numAccounts++;
+        return;
+    }
+    throw("failed to add account, max accounts reached");
 }
 
 Account User::removeAccount(int accountIndex){
-    for(int i = index; i < numAccounts; i++){
-        accounts[i] = accounts[i + 1]
+    if(accountIndex >= numAccounts){
+        throw("cannot delete this account, excedes available accounts");
+    }
+    Account accountToDelete = accounts[accountIndex];
+    for(int i = accountIndex; i < numAccounts; i++){
+        accounts[i] = accounts[i + 1];
     }
     numAccounts--;
+    return accountToDelete;
+    
 }

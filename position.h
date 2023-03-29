@@ -9,6 +9,7 @@ using namespace std;
 
 class Position : public Stock {
     float originalPricePerShare;
+    float currentPricePerShare;
     float numShares;
     string type;
     time_t date;
@@ -17,16 +18,20 @@ class Position : public Stock {
     Position();
     Position(float, float, float, string, string, time_t);
 
+    float getOPPS();
     float getCPPS();
     float getNumShares();
     string getType();
     time_t getDate();
 
-    float getValue();
     float getOriginalValue();
+    float getValue();
 
     void setOPPS(float);
+    void setCPPS(float);
     void setNumShares(float);
     void setType(string);
-    void getDate(time_t);
-}
+    void setDate(time_t);
+};
+
+#endif

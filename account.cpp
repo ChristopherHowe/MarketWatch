@@ -7,7 +7,7 @@ void Account::refreshAccount(){
 float Account::getPositionTotal(){
     float total = 0;
     for (int i = 0; i < numPositions; i++){
-        total += positionArray[i].getValue();
+        total += positions[i].getValue();
     }
     return total;
 }
@@ -15,7 +15,7 @@ float Account::getPositionTotal(){
 float Account::getOriginalPositionTotal(){
     float total = 0;
     for (int i = 0; i < numPositions; i++){
-        total += positionArray[i].getOriginalValue();
+        total += positions[i].getOriginalValue();
     }
     return total;
 }
@@ -39,7 +39,7 @@ Account::Account(){
     accountValue = 0;
     owner = "default owner";
 }
-Account::Account(Position[] newArray, int newNum, float newCash, string newOwner){
+Account::Account(Position* newArray, int newNum, float newCash, string newOwner){
     for(int i = 0; i< newNum; i++){
         positions[i]=newArray[i];
     }
@@ -51,7 +51,7 @@ Account::Account(Position[] newArray, int newNum, float newCash, string newOwner
 }
 
 //getters
-Position Account::getPositionArray() {
+Position* Account::getPositionArray() {
     return positions;
 }
 int Account::getNumPositions(){
@@ -63,18 +63,18 @@ float Account::getAccountValue(){
 string Account::getOwner(){
     return owner;
 }
-string Account::getCash(){
+float Account::getCash(){
     return cash;
 }
 
 
 //setters
-void Account::setPositionArray(Position[] newArray, int newNum){
+void Account::setPositionArray(Position* newArray, int newNum){
     for (int i = 0; i < newNum; i++){
         positions[i] = newArray[i];
     }
     numPositions = newNum;
-    refreshAccount()
+    refreshAccount();
 }
 void Account::setOwner(string newOwner){
     owner = newOwner;

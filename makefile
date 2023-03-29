@@ -13,10 +13,10 @@ position.o: position.h position.cpp stock.h
 stock.o: stock.cpp stock.h 
 	g++ -c stock.cpp
 
-account.o: account.cpp account.h
+account.o: account.cpp account.h position.h
 	g++ -c account.cpp
 
-user.o: user.cpp user.h
+user.o: user.cpp user.h account.h
 	g++ -c user.cpp
 
 clean:

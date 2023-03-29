@@ -10,10 +10,10 @@ class Market {
     Market();
     Market(Stock[], int);
 
-    Stock[] getStocks();
+    Stock* getStocks();
     int getNumStocks();
-    Stock getStockBySymbol(string)
+    Stock getStockBySymbol(string);
 
     void addStock(Stock);
     void updateStocks(Stock[], int);
-}
+};

@@ -1,7 +1,7 @@
 #include "stock.h"
 
 Stock::Stock(){
-    symbol = "default stock"
+    symbol = "default stock";
     price = 0;
 }
 
@@ -23,5 +23,5 @@ void Stock::setSymbol(string newSymbol){
 }
 
 void Stock::setPrice(float newPrice){
-    price = newPrice
+    price = newPrice;
 }

@@ -3,7 +3,7 @@
 
 #include <iostream>
 
-using namespace std
+using namespace std;
 
 class Stock {
     protected:
@@ -19,5 +19,5 @@ class Stock {
 
     void setSymbol(string);
     void setPrice(float);
-}
+};
 #endif

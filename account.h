@@ -15,13 +15,13 @@ class Account {
 
     void refreshAccount();
 
-    public::   
+    public:   
     //contstructors
     Account();
     Account(Position[],int, float, string);
 
     //getters
-    Position[] getPositionArray();
+    Position* getPositionArray();
     int getNumPositions();
     float getAccountValue();
     float getPositionTotal();
@@ -37,4 +37,6 @@ class Account {
     //position array manipulators
     void addPosition(Position);
     void removePosition(int);
-}
+};
+
+#endif

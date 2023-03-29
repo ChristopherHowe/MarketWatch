@@ -3,9 +3,11 @@
 
 #include "account.h"
 
+#define MAX_ACCOUNTS 10
+
 
 class User {
-    Account accounts[];
+    Account accounts[MAX_ACCOUNTS];
     int numAccounts;
     int activeAccount;
 
@@ -13,20 +15,20 @@ class User {
 
     public:
     User();
-    User(Account[], int newNumAccounts);
+    User(Account*, int newNumAccounts);
 
-    Account[] getAccounts();
+    Account* getAccounts();
     Account getAccount(int);
     Account getActiveAccount();
     int getNumAccounts();
     float getBalance();
     
     void changeActiveAccount(int accountIndex);
-    Account addAccount(Account);
+    void addAccount(Account);
     Account removeAccount(int accountIndex);
 
-    Position* purchasePosition(Stock, int numShares);
+    Position purchasePosition(Stock, float numShares);
     float sellPosition(int positionIndex);
-}
+};
 
 #endif

@@ -1,11 +1,12 @@
 #include "user.h"
 #include "market.h"
 
-void displayStocks();
+void displayStocks(Market);
+void cliPurchase(Market, User);
 
 int main(){
     Stock testMarket[3] = {Stock("XYZ",1.23), Stock("ABC", 12.34), Stock("DEF", 23.45)};
-    Stock newMarket[3] = 
+    Stock newMarket[3] = {Stock("XYX",2.34),Stock("ABC",23.45)};
     Position testPositions[1] = {Position(11.0, 11.0, 2, "XYZ", "buy", time(NULL))};
     Account testAccounts[1] = {Account(testPositions, 1, 100.00, "John")};
     
@@ -13,9 +14,9 @@ int main(){
     Market market(testMarket, 3);
 
     cliPurchase(market,testUser);
-    market.addStock
+    market.updateStocks(newMarket,3);
 
-    displayStocks();
+    displayStocks(market);
     return 0;
 }
     
