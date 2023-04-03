@@ -6,12 +6,12 @@ Market::Market(){
 
 Market::Market(Stock newStocks[], int newNumStocks){
     for(int i = 0; i < newNumStocks; i++){
-        stocks[i] = newStocks[i];
+        stocks.push_back(newStocks[i]);
     }
     numStocks = newNumStocks;
 }
 
-Stock* Market::getStocks(){
+vector<Stock> Market::getStocks(){
     return stocks;
 }
 
@@ -42,13 +42,35 @@ void Market::addStock(Stock newStock){
 }
 
 void Market::updateStocks(Stock* newStocks, int newNumStocks){
-    Stock notUpdated[MAX_STOCKS];
+    vector<Stock> notUpdated = stocks;
     int numNotUpdated;
-    for(int i = 0; i < numStocks; i++){
-        bool exists;
-        for(int x = 0; x < newNumStocks; x++){
-            if(stocks[i].getSymbol() == newStocks[x].getSymbol()){
+    for(int i = 0; i < newNumStocks; i++){
+        bool found = false;
+        for(int x = 0; x < numStocks; x++){
+            if(stocks[x].getSymbol() == newStocks[i].getSymbol()){
+                stocks[x].setPrice(newStocks[i].getPrice());
                 
+                //remove from notupdated need for loop since tryna find symbol FIX LATER
+                for(int z=0;z<notUpdated.size();z++){
+                    if(notUpdated[z].getSymbol()==stocks[x].getSymbol()){
+                        notUpdated.erase(notUpdated.begin()+z);
+                        break;
+                    }
+                }
+                found = true;
+                break;
+            }  
+        }
+        if(!found){
+            stocks.push_back(newStocks[i]);
+            numStocks++;
+        } 
+    }
+    for(int i = 0; i < notUpdated.size(); i++){
+        for(int x = 0; x < numStocks; x++){
+            if(stocks[x].getSymbol() == notUpdated[i].getSymbol()){
+                stocks.erase(stocks.begin() + x);
+                numStocks--;
             }
         }
     }

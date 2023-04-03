@@ -6,16 +6,17 @@ void cliPurchase(Market, User);
 
 int main(){
     Stock testMarket[3] = {Stock("XYZ",1.23), Stock("ABC", 12.34), Stock("DEF", 23.45)};
-    Stock newMarket[3] = {Stock("XYX",2.34),Stock("ABC",23.45)};
-    Position testPositions[1] = {Position(11.0, 11.0, 2, "XYZ", "buy", time(NULL))};
+    Stock newMarket[3] = {Stock("XYZ",2.34),Stock("ABC",23.45)};
+    Position testPositions[1] = {Position(11.0, 11.0, 2.0, "XYZ", "buy", time(NULL))};
     Account testAccounts[1] = {Account(testPositions, 1, 100.00, "John")};
     
     User testUser(testAccounts,1);
     Market market(testMarket, 3);
 
     cliPurchase(market,testUser);
-    market.updateStocks(newMarket,3);
-
+    cout << "user balance " << testUser.getBalance() << endl;
+    market.updateStocks(newMarket,2);
+    cout << "user balance " << testUser.getBalance() << endl;
     displayStocks(market);
     return 0;
 }

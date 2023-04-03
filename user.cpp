@@ -18,13 +18,12 @@ Position User::purchasePosition(Stock stock, float numShares){
     float c = accounts[activeAccount].getCash();
     float p = newPosition.getValue();
     if (c >= p){
+        cout << "in purchase position accounts[activeAccount]: " << &accounts[activeAccount]<< endl; 
         accounts[activeAccount].addPosition(newPosition);
         accounts[activeAccount].setCash(c - p);
         return newPosition;
     }
-    else{
-        return Position();
-    }
+    throw("could not purchase position, insufficent funds");
 } 
 
 float User::sellPosition(int positionIndex){
@@ -65,9 +64,12 @@ int User::getNumAccounts(){
 }
 
 float User::getBalance(){
-    float balance;
+    float balance=0;
+    cout << "starting getBalance" << endl;
     for(int i = 0; i < numAccounts; i++){
+        cout << "in getBalance accounts[i]:" << &accounts[i]<< endl;
         balance += accounts[i].getAccountValue();
+        cout << "adding to balance: " << accounts[i].getAccountValue() << endl;
     }
     return balance;
 }

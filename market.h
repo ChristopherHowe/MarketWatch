@@ -1,16 +1,16 @@
 #include "stock.h"
-
+#include <vector>
 #define MAX_STOCKS 100
 
 class Market {
-    Stock stocks[MAX_STOCKS];
+    vector<Stock> stocks;
     int numStocks;
 
     public:
     Market();
     Market(Stock[], int);
 
-    Stock* getStocks();
+    vector<Stock> getStocks();
     int getNumStocks();
     Stock getStockBySymbol(string);
 

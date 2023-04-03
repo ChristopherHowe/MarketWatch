@@ -9,7 +9,6 @@
 class Account {
     Position positions[MAX_POSITIONS];
     int numPositions;
-    float accountValue;
     float cash;
     string owner;
 
