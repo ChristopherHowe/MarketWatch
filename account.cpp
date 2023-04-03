@@ -90,7 +90,12 @@ void Account::setCash(float newCash){
 ostream & operator << (ostream &out, const Account & a){
     out << "{\"positions\": [";
     for(int i = 0; i < a.numPositions; i++){
-        out << a.positions[i] << ",";
+        Position p = a.positions[i];
+        out << "{\"symbol\": " << p.getSymbol()
+        << ", \"CPPS\": " << p.getCPPS()
+        << ", \"OPPS\": " << p.getOPPS() 
+        << ", \"numShares\": " << p.getNumShares()
+        << "}";
     }
     out << "],\"cash\": " << a.cash << "}";
     return out;
