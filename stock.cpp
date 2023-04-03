@@ -1,5 +1,10 @@
 #include "stock.h"
 
+ostream & operator << (ostream & out, const Stock &s){
+    out << "{\"symbol\": " << s.symbol << " \"price\": " << s.price << "}";
+    return out;
+}
+
 Stock::Stock(){
     symbol = "default stock";
     price = 0;

@@ -101,3 +101,13 @@ Account User::removeAccount(int accountIndex){
     return accountToDelete;
     
 }
+
+ostream & operator << (ostream & out, const User & u){
+    out << "{\"accounts\": [";
+    for(int i =0; i < u.numAccounts; i++){
+        cout << u.accounts[i];
+    }
+    out << "]" << ","  << "}";
+    return out;
+}
+

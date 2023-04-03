@@ -19,5 +19,6 @@ class Stock {
 
     void setSymbol(string);
     void setPrice(float);
+    friend ostream & operator << (ostream & out, const Stock &s);
 };
 #endif

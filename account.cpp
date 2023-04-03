@@ -86,3 +86,12 @@ void Account::setCash(float newCash){
     cash = newCash;
     refreshAccount();
 }
+
+ostream & operator << (ostream &out, const Account & a){
+    out << "{\"positions\": [";
+    for(int i = 0; i < a.numPositions; i++){
+        out << a.positions[i] << ",";
+    }
+    out << "],\"cash\": " << a.cash << "}";
+    return out;
+}

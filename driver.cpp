@@ -14,11 +14,11 @@ int main(){
     Account testAccounts[1] = {Account(testPositions, 1, 100.00, "John")};
     
     User testUser(testAccounts,1);
-
+    cout << testUser << endl;
     cliPurchase(&market,testUser);
-    cout << "user balance " << testUser.getBalance() << endl;
+    cout << testUser << endl;
     market.updateStocks(newMarket,2);
-    cout << "user balance " << testUser.getBalance() << endl;
+    cout << testUser << endl;
     displayStocks(market);
     return 0;
 }

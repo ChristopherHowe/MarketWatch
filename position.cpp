@@ -15,6 +15,7 @@ Position::Position(float newOPPS, float newNumShares, Market* newMarket, string 
     symbol = newSymbol;
     type = newType;
     date = newDate;
+    getCPPS();
     //cout << "in position constructor: market: " << market << endl;
 }
 
@@ -23,7 +24,8 @@ float Position::getOPPS(){
 }
 float Position::getCPPS(){
     //cout << "market: " << market << endl;
-    return market->getStockBySymbol(symbol).getPrice();
+    currentPricePerShare = market->getStockBySymbol(symbol).getPrice();
+    return currentPricePerShare;
 }
 
 
@@ -60,4 +62,13 @@ void Position::setType(string newType){
 }
 void Position::setDate(time_t newDate){
     date = newDate;
+}
+
+ostream & operator << (ostream & out, const Position& p){
+    out << "{\"symbol\": " << p.symbol
+        << ", \"CPPS\": " << p.currentPricePerShare
+        << ", \"OPPS\": " << p.originalPricePerShare 
+        << ", \"numShares\": " << p.numShares
+        << "}";
+    return out;
 }

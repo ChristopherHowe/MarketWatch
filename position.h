@@ -9,6 +9,7 @@ using namespace std;
 
 class Position : public Stock {
     float originalPricePerShare;
+    float currentPricePerShare;
     float numShares;
     Market* market;
     string symbol;
@@ -33,6 +34,8 @@ class Position : public Stock {
     void setNumShares(float);
     void setType(string);
     void setDate(time_t);
+
+    friend ostream & operator << (ostream & out, const Position & p);
 };
 
 #endif

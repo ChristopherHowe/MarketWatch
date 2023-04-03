@@ -29,6 +29,8 @@ class User {
 
     Position purchasePosition(Stock, Market*, float numShares);
     float sellPosition(int positionIndex);
+
+    friend ostream & operator << (ostream & out, const User& u);
 };
 
 #endif

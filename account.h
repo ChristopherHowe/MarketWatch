@@ -36,6 +36,7 @@ class Account {
     //position array manipulators
     void addPosition(Position);
     void removePosition(int);
+    friend ostream & operator  << (ostream & out, const Account & a);
 };
 
 #endif
