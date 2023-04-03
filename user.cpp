@@ -6,19 +6,22 @@ void User::changeActiveAccount(int AccountIndex){
     }
 }
 
-Position User::purchasePosition(Stock stock, float numShares){
+Position User::purchasePosition(Stock stock, Market* market, float numShares){
     Position newPosition(
         stock.getPrice(),
-        stock.getPrice(),
         numShares, 
+        market,
         stock.getSymbol(),
         "buy",
         time(NULL));
-
+    //cout << "created position" << endl;
+    //cout << "activeAccount: " << activeAccount << endl;
     float c = accounts[activeAccount].getCash();
+    //cout << "got cash" << endl;
     float p = newPosition.getValue();
+    cout << "got position value: " << p << endl;
     if (c >= p){
-        cout << "in purchase position accounts[activeAccount]: " << &accounts[activeAccount]<< endl; 
+        //cout << "in purchase position accounts[activeAccount]: " << &accounts[activeAccount]<< endl; 
         accounts[activeAccount].addPosition(newPosition);
         accounts[activeAccount].setCash(c - p);
         return newPosition;
@@ -38,6 +41,7 @@ float User::sellPosition(int positionIndex){
 User::User(){
     numAccounts = 1;
     accounts[0] = Account({}, 0, 0, "default owner");
+    activeAccount = 0;
 }
 
 User::User(Account* newAccounts, int newNumAccounts){
@@ -45,6 +49,7 @@ User::User(Account* newAccounts, int newNumAccounts){
         accounts[i] = newAccounts[i];
     }
     numAccounts = newNumAccounts;
+    activeAccount = 0;
 }
 
 //getters
@@ -65,11 +70,11 @@ int User::getNumAccounts(){
 
 float User::getBalance(){
     float balance=0;
-    cout << "starting getBalance" << endl;
+    //cout << "starting getBalance" << endl;
     for(int i = 0; i < numAccounts; i++){
-        cout << "in getBalance accounts[i]:" << &accounts[i]<< endl;
+        //cout << "in getBalance accounts[i]:" << &accounts[i]<< endl;
         balance += accounts[i].getAccountValue();
-        cout << "adding to balance: " << accounts[i].getAccountValue() << endl;
+        //cout << "adding to balance: " << accounts[i].getAccountValue() << endl;
     }
     return balance;
 }

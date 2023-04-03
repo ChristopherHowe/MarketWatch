@@ -2,18 +2,20 @@
 #include "market.h"
 
 void displayStocks(Market);
-void cliPurchase(Market, User);
+void cliPurchase(Market*, User&);
 
 int main(){
     Stock testMarket[3] = {Stock("XYZ",1.23), Stock("ABC", 12.34), Stock("DEF", 23.45)};
     Stock newMarket[3] = {Stock("XYZ",2.34),Stock("ABC",23.45)};
-    Position testPositions[1] = {Position(11.0, 11.0, 2.0, "XYZ", "buy", time(NULL))};
+    Market market(testMarket, 3);
+    //cout << "market: " << &market << endl;
+    
+    Position testPositions[1] = {Position(11.0, 2.0, &market, "XYZ", "buy", time(NULL))};
     Account testAccounts[1] = {Account(testPositions, 1, 100.00, "John")};
     
     User testUser(testAccounts,1);
-    Market market(testMarket, 3);
 
-    cliPurchase(market,testUser);
+    cliPurchase(&market,testUser);
     cout << "user balance " << testUser.getBalance() << endl;
     market.updateStocks(newMarket,2);
     cout << "user balance " << testUser.getBalance() << endl;
@@ -28,13 +30,13 @@ void displayStocks(Market market){
     }
 }
 
-void cliPurchase(Market market, User user){
+void cliPurchase(Market* market, User &user){
     int choice;
     int shares;
-    displayStocks(market);
+    displayStocks(*market);
     cout << "which would you like to purchase?: ";
     cin >> choice;
     cout << "how many shares would you like?: ";
     cin >> shares;
-    user.purchasePosition(market.getStocks()[choice - 1], shares);
+    user.purchasePosition(market->getStocks()[choice - 1], market, shares);
 }

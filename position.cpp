@@ -4,20 +4,28 @@ Position::Position(){
     originalPricePerShare = 0;
     numShares = 0;
     symbol = "DEFAULT";
+    type = "default";
+    date = time_t();
 }
 
-Position::Position(float newOPPS, float newCPPS, float newNumShares, string newSymbol, string newType, time_t newDate){
+Position::Position(float newOPPS, float newNumShares, Market* newMarket, string newSymbol, string newType, time_t newDate){
     originalPricePerShare = newOPPS;
-    currentPricePerShare = newCPPS;
     numShares = newNumShares;
+    market = newMarket;
     symbol = newSymbol;
     type = newType;
     date = newDate;
+    //cout << "in position constructor: market: " << market << endl;
 }
 
 float Position::getOPPS(){
     return originalPricePerShare;
 }
+float Position::getCPPS(){
+    //cout << "market: " << market << endl;
+    return market->getStockBySymbol(symbol).getPrice();
+}
+
 
 float Position::getNumShares(){
     return numShares;
@@ -36,14 +44,12 @@ float Position::getOriginalValue(){
 }
 
 float Position::getValue(){
-    return numShares * currentPricePerShare;
+    //cout << "calling getValue" << endl;
+    return numShares * getCPPS();
 }
 
 void Position::setOPPS(float newOPPS){
     originalPricePerShare = newOPPS;
-}
-void Position::setCPPS(float newCPPS){
-    currentPricePerShare = newCPPS;
 }
 
 void Position::setNumShares(float newNumShares) {

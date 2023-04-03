@@ -1,4 +1,4 @@
 make clean
-clear
 make
+clear
 ./marketwatch

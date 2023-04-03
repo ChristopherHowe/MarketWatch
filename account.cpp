@@ -5,14 +5,11 @@ void Account::refreshAccount(){
 }
 
 float Account::getPositionTotal(){
-    cout << "in getPositionTotal: ";
     float total = 0;
-    cout << "numPositions: " << numPositions << ", this pointer" << this;
     for (int i = 0; i < numPositions; i++){
         total += positions[i].getValue();
-        cout << "value " << i << ". " << positions[i].getValue();
+        //cout << i<< ". value: " << positions[i].getValue() << endl;
     }
-    cout << endl;
     return total;
 }
 
@@ -25,10 +22,8 @@ float Account::getOriginalPositionTotal(){
 }
 
 void Account::addPosition(Position newPosition){
-    cout << "in addPosition: this pointer: " << this;
     positions[numPositions] = newPosition;
     numPositions++;
-    cout << "after adding position numPos: " << numPositions << endl;
     refreshAccount();
 }
 
@@ -65,7 +60,6 @@ int Account::getNumPositions(){
     return numPositions;
 }
 float Account::getAccountValue(){
-    cout << "in getAccountValue getPositionbTotal:" << getPositionTotal() << endl;
     return getPositionTotal() + cash;
 }
 string Account::getOwner(){

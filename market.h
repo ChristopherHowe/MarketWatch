@@ -1,3 +1,6 @@
+#ifndef MARKET_H
+#define MARKET_H
+
 #include "stock.h"
 #include <vector>
 #define MAX_STOCKS 100
@@ -17,3 +20,5 @@ class Market {
     void addStock(Stock);
     void updateStocks(Stock[], int);
 };
+
+#endif

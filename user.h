@@ -27,7 +27,7 @@ class User {
     void addAccount(Account);
     Account removeAccount(int accountIndex);
 
-    Position purchasePosition(Stock, float numShares);
+    Position purchasePosition(Stock, Market*, float numShares);
     float sellPosition(int positionIndex);
 };
 
