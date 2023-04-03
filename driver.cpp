@@ -8,9 +8,9 @@ int main(){
     Stock testMarket[3] = {Stock("XYZ",1.23), Stock("ABC", 12.34), Stock("DEF", 23.45)};
     Stock newMarket[3] = {Stock("XYZ",2.34),Stock("ABC",23.45)};
     Market market(testMarket, 3);
-    //cout << "market: " << &market << endl;
+    cout << "market: " << &market << endl;
     
-    Position testPositions[1] = {Position(11.0, 2.0, &market, "XYZ", "buy", time(NULL))};
+    Position testPositions[1] = {Position(testMarket[0], 2.0, &market, "buy", time(NULL))};
     Account testAccounts[1] = {Account(testPositions, 1, 100.00, "John")};
     
     User testUser(testAccounts,1);

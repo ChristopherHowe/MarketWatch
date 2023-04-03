@@ -8,10 +8,9 @@ void User::changeActiveAccount(int AccountIndex){
 
 Position User::purchasePosition(Stock stock, Market* market, float numShares){
     Position newPosition(
-        stock.getPrice(),
+        stock,
         numShares, 
         market,
-        stock.getSymbol(),
         "buy",
         time(NULL));
     //cout << "created position" << endl;
