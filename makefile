@@ -1,3 +1,10 @@
+
+# Compiler
+CXX = g++
+CFLAGS= -Wall -Werror #makes all warnings errors
+
+
+# Libraries
 CFLAGS=-02 $(shell pkg-config --cflags netcdf)
 LDFLAGS=$(shell pkg-config --libs netcdf)
 

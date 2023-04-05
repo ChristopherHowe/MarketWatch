@@ -1,6 +1,12 @@
 #include "user.h"
 #include "market.h"
 
+int main(){
+    
+}
+
+
+/*
 void displayStocks(Market);
 void cliPurchase(Market*, User&);
 
@@ -14,11 +20,9 @@ int main(){
     Account testAccounts[1] = {Account(testPositions, 1, 100.00, "John")};
     
     User testUser(testAccounts,1);
-    /*
     cliPurchase(&market,testUser);
     market.updateStocks(newMarket,2);
     displayStocks(market);
-    */
     return 0;
 }
     
@@ -38,4 +42,4 @@ void cliPurchase(Market* market, User &user){
     cout << "how many shares would you like?: ";
     cin >> shares;
     user.purchasePosition(market->getStocks()[choice - 1], market, shares);
-}
+}*/

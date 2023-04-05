@@ -1,0 +1,11 @@
+All this stuff is installed in github codebase so writing notes on how 
+to set it up again
+libcurl is the basic library for adding http requests to any c++ program
+curlpp is a wrapper library that makes it easier to do object oriented 
+stuff with libcurl
+dpkg -S libcurl shows which files are owned by package libcurl and where
+sudo apt-get install libcurl4-openssl-dev how to install libcurl
+curlpp comes as a zip or a tar so I just have it in the repo for now.
+
+
+https://stackoverflow.com/questions/6601041/linking-curl-in-makefile
