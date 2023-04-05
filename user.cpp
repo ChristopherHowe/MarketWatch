@@ -102,6 +102,7 @@ Account User::removeAccount(int accountIndex){
 }
 
 ostream & operator << (ostream & out, const User & u){
+    cout << "here" << endl;
     out << "{\"accounts\": [";
     for(int i =0; i < u.numAccounts; i++){
         cout << u.accounts[i];

@@ -9,19 +9,18 @@ Position::Position(){
 
 Position::Position(Stock newStock, float newNumShares, Market* newMarket, string newType, time_t newDate){
     symbol = newStock.getSymbol();
-    price = getCPPS();
     numShares = newNumShares;
     market = newMarket;
+    price = getCPPS();
+    originalPricePerShare = price;
     type = newType;
     date = newDate;
-    //cout << "in position constructor: market: " << market << endl;
 }
 
 float Position::getOPPS(){
     return originalPricePerShare;
 }
 float Position::getCPPS(){
-    //cout << "market: " << market << endl;
     price = market->getStockBySymbol(symbol).getPrice();
     return price;
 }
