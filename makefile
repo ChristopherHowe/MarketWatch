@@ -1,3 +1,6 @@
+CFLAGS=-02 $(shell pkg-config --cflags netcdf)
+LDFLAGS=$(shell pkg-config --libs netcdf)
+
 marketwatch: driver.o market.o position.o stock.o account.o user.o
 	g++ -o marketwatch driver.o market.o position.o stock.o account.o user.o
 
@@ -9,6 +12,7 @@ market.o: market.h market.cpp stock.h
 
 position.o: position.h position.cpp stock.h
 	g++ -c position.cpp
+
 
 stock.o: stock.cpp stock.h 
 	g++ -c stock.cpp
