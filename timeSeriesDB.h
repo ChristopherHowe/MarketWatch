@@ -18,9 +18,10 @@ class TimeDB{
     vector<time_t> snapTimes;
     
     public:
+    TimeDB();
     Market getLatestmarket();
     vector<MarketSnapshot> getAllSnapshots();
-    vector<StockSnapshot> getStockRecord(time_t start, time_t end);
+    vector<StockSnapshot> getStockRecord(time_t start, time_t end, string symbol);
     time_t getFirstTime();
     time_t getLastTime();
 

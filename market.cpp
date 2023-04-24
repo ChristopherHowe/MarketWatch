@@ -75,3 +75,11 @@ void Market::updateStocks(Stock* newStocks, int newNumStocks){
         }
     }
 }
+
+ostream & operator << (ostream &out, const Market &market){
+    out << "{\"stocks\": ";
+    for(int x = 0; x < market.numStocks; x++){
+        out << market.stocks[x];
+    }
+    return out;
+}

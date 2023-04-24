@@ -1,20 +1,25 @@
 #include "user.h"
 #include "market.h"
+#include "timeSeriesDB.h"
 
-int main(){
-    
-}
-
-
-/*
 void displayStocks(Market);
 void cliPurchase(Market*, User&);
 
 int main(){
+    TimeDB timeDB;
     Stock testMarket[3] = {Stock("XYZ",1.23), Stock("ABC", 12.34), Stock("DEF", 23.45)};
     Stock newMarket[3] = {Stock("XYZ",2.34),Stock("ABC",23.45)};
+    Stock B[3] = {Stock("B",111)};
+    
     Market market(testMarket, 3);
-    cout << "market: " << &market << endl;
+    timeDB.addSnapshot(market,time(NULL));
+    cout << timeDB.getLatestmarket() << endl;
+    market.updateStocks(newMarket,2);
+    timeDB.addSnapshot(market,time(NULL));
+    cout << timeDB.getLatestmarket()<< endl;
+
+
+    /*cout << "market: " << &market << endl;
     
     Position testPositions[1] = {Position(testMarket[0], 2.0, &market, "buy", time(NULL))};
     Account testAccounts[1] = {Account(testPositions, 1, 100.00, "John")};
@@ -23,7 +28,7 @@ int main(){
     cliPurchase(&market,testUser);
     market.updateStocks(newMarket,2);
     displayStocks(market);
-    return 0;
+    return 0;*/
 }
     
 void displayStocks(Market market){
@@ -42,4 +47,4 @@ void cliPurchase(Market* market, User &user){
     cout << "how many shares would you like?: ";
     cin >> shares;
     user.purchasePosition(market->getStocks()[choice - 1], market, shares);
-}*/
+}

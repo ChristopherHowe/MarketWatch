@@ -19,6 +19,8 @@ class Market {
 
     void addStock(Stock);
     void updateStocks(Stock[], int);
+
+    friend ostream & operator << (ostream &, const Market &);
 };
 
 #endif
