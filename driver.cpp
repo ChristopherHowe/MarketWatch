@@ -1,6 +1,7 @@
 #include "user.h"
 #include "market.h"
 #include "timeSeriesDB.h"
+#include <unistd.h>
 
 void displayStocks(Market);
 void cliPurchase(Market*, User&);
@@ -9,14 +10,25 @@ int main(){
     TimeDB timeDB;
     Stock testMarket[3] = {Stock("XYZ",1.23), Stock("ABC", 12.34), Stock("DEF", 23.45)};
     Stock newMarket[3] = {Stock("XYZ",2.34),Stock("ABC",23.45)};
-    Stock B[3] = {Stock("B",111)};
-    
+    Stock B[3] = {Stock("XYZ",111)};
+    Stock C[3] = {Stock("XYZ",222)};
+    Stock D[3] = {Stock("XYZ",333)};
+
     Market market(testMarket, 3);
     timeDB.addSnapshot(market,time(NULL));
-    cout << timeDB.getLatestmarket() << endl;
+    sleep(1);
     market.updateStocks(newMarket,2);
     timeDB.addSnapshot(market,time(NULL));
-    cout << timeDB.getLatestmarket()<< endl;
+    sleep(1);
+    market.updateStocks(B,1);
+    timeDB.addSnapshot(market,time(NULL));
+    sleep(1);
+    market.updateStocks(C,1);
+    timeDB.addSnapshot(market,time(NULL));
+    sleep(1);
+    market.updateStocks(D,1);
+    timeDB.addSnapshot(market,time(NULL));
+    vector<StockSnapshot> stockHistory = timeDB.getStockRecord(timeDB.getFirstTime()+1, timeDB.getLastTime()-1, "XYZ");
 
 
     /*cout << "market: " << &market << endl;

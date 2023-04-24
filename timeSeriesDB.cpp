@@ -9,18 +9,23 @@ Market TimeDB::getLatestmarket(){
 }
 
 vector<MarketSnapshot> TimeDB::getAllSnapshots(){
+    if(snapTimes.size() == 0){
+        throw runtime_error("cannot get snapshots, DB is empty");
+    }
     vector<MarketSnapshot> result;
     for(int i = 0; i < snapTimes.size(); i++){
         MarketSnapshot newEntry = {
             marketSnaps[i],
             snapTimes[i]
         };
+        result.push_back(newEntry);
     }
     return result;
 }
 vector<StockSnapshot> TimeDB::getStockRecord(time_t start, time_t end, string symbol){
     int startInd = 0, endInd = snapTimes.size();
     for(int i = 0; i < snapTimes.size(); i++){
+        cout << "start time: " << start << " end time: " << end << " snapTime: " << snapTimes[i] << endl;
         if(snapTimes[i] == start){
             startInd = i;
         }
@@ -30,9 +35,10 @@ vector<StockSnapshot> TimeDB::getStockRecord(time_t start, time_t end, string sy
         if(startInd > endInd){
             throw runtime_error("start index is after the end index");
         }
-    }
+    }cout << "size: " << snapTimes.size();
+    cout << "start: " << startInd << " end: " << endInd;
     vector<StockSnapshot> result;
-    for(int i=startInd; i < endInd; i++){
+    for(int i = startInd; i <= endInd; i++){
         StockSnapshot newEntry= {
             marketSnaps[i].getStockBySymbol(symbol),
             snapTimes[i]
@@ -57,4 +63,8 @@ bool TimeDB::addSnapshot(Market market, time_t time){
     marketSnaps.push_back(market);
     snapTimes.push_back(time);
     return true;
+}
+
+bool TimeDB::isEmpty(){
+    return snapTimes.size() == 0;
 }

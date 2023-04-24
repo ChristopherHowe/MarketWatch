@@ -24,6 +24,7 @@ class TimeDB{
     vector<StockSnapshot> getStockRecord(time_t start, time_t end, string symbol);
     time_t getFirstTime();
     time_t getLastTime();
+    bool isEmpty();
 
     bool addSnapshot(Market, time_t);
 

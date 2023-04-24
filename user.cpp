@@ -25,7 +25,7 @@ Position User::purchasePosition(Stock stock, Market* market, float numShares){
         accounts[activeAccount].setCash(c - p);
         return newPosition;
     }
-    throw("could not purchase position, insufficent funds");
+    throw runtime_error("could not purchase position, insufficent funds");
 } 
 
 float User::sellPosition(int positionIndex){
@@ -85,12 +85,12 @@ void User::addAccount(Account newAccount){
         numAccounts++;
         return;
     }
-    throw("failed to add account, max accounts reached");
+    throw runtime_error("failed to add account, max accounts reached");
 }
 
 Account User::removeAccount(int accountIndex){
     if(accountIndex >= numAccounts){
-        throw("cannot delete this account, excedes available accounts");
+        throw runtime_error("cannot delete this account, excedes available accounts");
     }
     Account accountToDelete = accounts[accountIndex];
     for(int i = accountIndex; i < numAccounts; i++){

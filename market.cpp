@@ -25,7 +25,7 @@ Stock Market::getStockBySymbol(string symbol){
             return stocks[i];
         }
     }
-    throw "stock not found";
+    throw runtime_error("stock not found");
 }
 
 void Market::addStock(Stock newStock){
