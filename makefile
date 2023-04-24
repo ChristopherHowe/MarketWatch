@@ -1,7 +1,7 @@
 
 # Compiler
 CXX = g++
-CFLAGS= -Wall -Werror #makes all warnings errors
+CFLAGS= -Wall -Werror # makes all warnings errors
 
 
 # Libraries
