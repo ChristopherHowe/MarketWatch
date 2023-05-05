@@ -9,3 +9,9 @@ curlpp comes as a zip or a tar so I just have it in the repo for now.
 
 
 https://stackoverflow.com/questions/6601041/linking-curl-in-makefile
+
+possible ticker apis
+alpha vantage, provides good data, free for 500 req/day 5/main
+12 data, 800 credits per day 8 per min
+
+key for twelve data is in personal and passport

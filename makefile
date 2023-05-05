@@ -1,17 +1,22 @@
-
-# Compiler
+# C++ Compiler (Default: g++)
 CXX = g++
-CFLAGS= -Wall -Werror # makes all warnings errors
+CFLAGS = -Wall -Werror
 
+# Librarys
+INCLUDE = -Iusr/local/include
+LDFLAGS = -Lusr/local/lib 
+LDLIBS = -lcurl
 
-# Libraries
-CFLAGS=-02 $(shell pkg-config --cflags netcdf)
-LDFLAGS=$(shell pkg-config --libs netcdf)
+# Details
+SOURCES = driver.o market.o position.o stock.o account.o user.o timeSeriesDB.o 
+OUT = marketwatch
 
-marketwatch: driver.o market.o position.o stock.o account.o user.o timeSeriesDB.o
-	g++ -o marketwatch driver.o market.o position.o stock.o account.o user.o timeSeriesDB.o
+all: build
 
-driver.o: driver.cpp 
+build: $(SOURCES)
+	$(CXX) -o $(OUT) $(INCLUDE) $(CFLAGS) $(LDFLAGS) $(SOURCES) $(LDLIBS)
+
+driver.o: driver.cpp libstructs.h
 	g++ -c driver.cpp
 
 timeSeriesDB.o: timeSeriesDB.h timeSeriesDB.cpp
@@ -32,6 +37,5 @@ account.o: account.cpp account.h position.h
 
 user.o: user.cpp user.h account.h
 	g++ -c user.cpp
-
 clean:
 	rm *.o marketwatch
