@@ -22,6 +22,7 @@ add_library(user src/user.cpp)
 target_include_directories(user PUBLIC include)
 
 # PUBLIC needed to make .h and .cpp files accessible to exe
+#Below was not working on its own for some reason, thats why all the target includes are
 target_include_directories(marketwatch
     PUBLIC include/)
 

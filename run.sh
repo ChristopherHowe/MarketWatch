@@ -1,6 +1,7 @@
+cd build
 make clean
 make && clear
-source env.sh
+source ../env.sh
 if [ -z $TWELVE_KEY ]; 
     then
     echo failed to load in stock API key, make sure twelve-data-token is in ~/personal directory
@@ -14,4 +15,4 @@ if [ -z $API_DOMAIN ];
     exit
 fi
 
-./marketwatch
+app/marketwatch
