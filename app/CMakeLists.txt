@@ -11,4 +11,10 @@ add_executable(marketwatch ${SOURCES} driver.cpp)
 
 find_package(CURL REQUIRED) 
 include_directories(${CURL_INCLUDE_DIR})
-target_link_libraries(marketwatch ${CURL_LIBRARIES})
+#include_directories("/usr/local/lib")
+target_include_directories(marketwatch PUBLIC "/usr/local/lib")
+target_link_libraries(marketwatch ${CURL_LIBRARIES} restbed)
+
+
+
+message("finished including restbed")

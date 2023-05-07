@@ -1,4 +1,4 @@
-#include "libstructs.h"
+#include "library.h"
 
 void init_string(struct bString *s) {
   s->len = 0;

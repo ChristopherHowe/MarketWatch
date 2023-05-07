@@ -6,6 +6,9 @@
 #include <ctime>
 #include <curl/curl.h>
 
+
+#define MAX_USERS 10
+
 struct ApiConfig {
     std::string domain;
     std::string key;

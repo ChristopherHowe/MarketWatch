@@ -8,8 +8,6 @@ set(BUILD_SHARED_LIBS ON)
 
 add_library(account src/account.cpp)
 target_include_directories(account PUBLIC include)
-add_library(libstructs src/libstructs.cpp)
-target_include_directories(libstructs PUBLIC include)
 add_library(market src/market.cpp)
 target_include_directories(market PUBLIC include)
 add_library(position src/position.cpp)
@@ -20,6 +18,10 @@ add_library(timeSeriesDB src/timeSeriesDB.cpp)
 target_include_directories(timeSeriesDB PUBLIC include)
 add_library(user src/user.cpp)
 target_include_directories(user PUBLIC include)
+add_library(api src/api.cpp)
+target_include_directories(api PUBLIC include)
+add_library(library src/library.cpp)
+target_include_directories(library PUBLIC include)
 
 # PUBLIC needed to make .h and .cpp files accessible to exe
 #Below was not working on its own for some reason, thats why all the target includes are

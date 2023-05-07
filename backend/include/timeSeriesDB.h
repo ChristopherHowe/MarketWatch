@@ -2,7 +2,7 @@
 #define TIME_SERIES_H
 #include "market.h"
 #include <ctime>
-#include "libstructs.h"
+#include "library.h"
 
 struct MarketSnapshot{
     Market market;

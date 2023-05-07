@@ -1,8 +1,8 @@
 cd build && rm * -rf && echo removed all build files
 
 cmake ..
-make clean
-make && clear
+#make clean
+make && #clear
 source ../env.sh
 if [ -z $TWELVE_KEY ]; 
     then

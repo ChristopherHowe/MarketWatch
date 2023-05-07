@@ -1,11 +1,13 @@
-#include "user.h"
-#include "market.h"
-#include "timeSeriesDB.h"
+#include "api.h"
 #include <unistd.h>
 #include <cstdlib>
-#include "libstructs.h"
+#include "library.h"
 #include "json.hpp"
 #include <fstream>
+
+
+
+
 using json = nlohmann::json;
 
 
@@ -20,15 +22,27 @@ void useFakeData(ApiConfig config, Query query, TimeDB &timeDB, Market &market);
 
 
 
-int main(){    
+
+int main(){ 
+    
+     
     ApiConfig apiCnfg;
 
     TimeDB timeDB;
     Market market;
 
+    Position testPositions[0] = {};
+    Account testAccounts[1] = {Account(testPositions, 0, 1000.00, "John")};
+    User testUser(testAccounts,1);
+    User* userArray[MAX_USERS] = {&testUser};
+    int numUsers = 1;
+
+    System system = fillSystem(&market, &timeDB, userArray, numUsers 0);
+
+    
 
     getConfiguration(apiCnfg);
-        cout << "started main" << endl;
+    cout << "started main" << endl;
 
     //displayConfig(apiCnfg);
     Query query = makeStockQuery("ABC", 15, 30);
@@ -38,14 +52,12 @@ int main(){
     vector<StockSnapshot> stockHistory = timeDB.getStockRecord(timeDB.getFirstTime(), timeDB.getLastTime(), "ABC");
     //displayStockRecord(stockHistory);
     //displayStockRecTimes(stockHistory);
-
+    hostAPI(system);
     
     market.updateStocks(timeDB.getAllSnapshots()[0].market);
     cout << "updated market to 0" << endl;
 
-    Position testPositions[0] = {};
-    Account testAccounts[1] = {Account(testPositions, 0, 1000.00, "John")};
-    User testUser(testAccounts,1);
+    
     cliPurchase(&market,testUser);
     
     market.updateStocks(timeDB.getAllSnapshots()[10].market);

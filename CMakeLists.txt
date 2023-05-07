@@ -10,8 +10,6 @@ project(
 add_subdirectory(app)  
 add_subdirectory(backend) 
 
-
-
 #add_subdirectory(apps)    
 #if(PROJECT_NAME STREQUAL CMAKE_PROJECT_NAME)
 #add_subdirectory(tests)
