@@ -26,7 +26,10 @@ int main(){
     TimeDB timeDB;
     Market market;
 
+
     getConfiguration(apiCnfg);
+        cout << "started main" << endl;
+
     //displayConfig(apiCnfg);
     Query query = makeStockQuery("ABC", 15, 30);
     //getStockData(apiCnfg, query, timeDB, market);
@@ -125,7 +128,7 @@ void cliPurchase(Market* market, User &user){
 void useFakeData(ApiConfig config, Query query, TimeDB &timeDB, Market &market){
     cout <<  "using fake data to preserve credits"  << endl;
     ifstream file;
-    file.open("test.txt");
+    file.open("../test.txt");
     json data = json::parse(file);
     //cout << data << endl;
     for(int i =query.vals-1; i >= 0; i--){ 

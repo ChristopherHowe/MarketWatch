@@ -7,15 +7,22 @@ project(marketwatch)
 set(BUILD_SHARED_LIBS ON)
 
 add_library(account src/account.cpp)
+target_include_directories(account PUBLIC include)
 add_library(libstructs src/libstructs.cpp)
+target_include_directories(libstructs PUBLIC include)
 add_library(market src/market.cpp)
+target_include_directories(market PUBLIC include)
 add_library(position src/position.cpp)
+target_include_directories(position PUBLIC include)
 add_library(stock src/stock.cpp)
+target_include_directories(stock PUBLIC include)
 add_library(timeSeriesDB src/timeSeriesDB.cpp)
+target_include_directories(timeSeriesDB PUBLIC include)
 add_library(user src/user.cpp)
-
+target_include_directories(user PUBLIC include)
 
 # PUBLIC needed to make .h and .cpp files accessible to exe
-target_include_directories(${PROJECT_NAME}
-    PUBLIC ${PROJECT_SOURCE_DIR}/include)
+target_include_directories(marketwatch
+    PUBLIC include/)
+
 
