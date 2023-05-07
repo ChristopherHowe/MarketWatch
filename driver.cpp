@@ -2,90 +2,91 @@
 #include "market.h"
 #include "timeSeriesDB.h"
 #include <unistd.h>
-#include <curl/curl.h>
 #include <cstdlib>
 #include "libstructs.h"
+#include "json.hpp"
+#include <fstream>
+using json = nlohmann::json;
+
+
 
 void displayStocks(Market);
 void cliPurchase(Market*, User&);
-void getApiData(ApiConfig config);
+void dispayConfig(ApiConfig config);
 void getConfiguration(ApiConfig &config);
-void getStockData(ApiConfig config, string symbol, int interval /*seconds*/);
+void getStockData(ApiConfig config, Query query, TimeDB &timeDB, Market &market);
+Query makeStockQuery(string symbol, int interval /*minutes*/, int numVals);
+void useFakeData(ApiConfig config, Query query, TimeDB &timeDB, Market &market);
 
-int main(){
-    CURL *curl;
-    CURLcode res;
+
+
+int main(){    
     ApiConfig apiCnfg;
-    getConfiguration(apiCnfg);
 
-    struct MemoryStruct chunk;
- 
-    chunk.memory = malloc(1);  /* will be grown as needed by the realloc above */
-    chunk.size = 0;    /* no data at this point */
-
-    getApiData(apiCnfg);
-    getStockData(apiCnfg, "ABC", 5);
-
-
-    throw runtime_error("done");
-    curl = curl_easy_init();
-    if(curl) {
-        curl_easy_setopt(curl, CURLOPT_URL, "http://example.com");
-        res = curl_easy_perform(curl);
-        curl_easy_cleanup(curl);
-    }
-
-
-    /*
     TimeDB timeDB;
-    Stock testMarket[3] = {Stock("XYZ",1.23), Stock("ABC", 12.34), Stock("DEF", 23.45)};
-    Stock newMarket[3] = {Stock("XYZ",2.34),Stock("ABC",23.45)};
-    Stock B[3] = {Stock("XYZ",111)};
-    Stock C[3] = {Stock("XYZ",222)};
-    Stock D[3] = {Stock("XYZ",333)};
+    Market market;
 
-    Market market(testMarket, 3);
-    timeDB.addSnapshot(market,time(NULL));
-    sleep(1);
-    market.updateStocks(newMarket,2);
-    timeDB.addSnapshot(market,time(NULL));
-    sleep(1);
-    market.updateStocks(B,1);
-    timeDB.addSnapshot(market,time(NULL));
-    sleep(1);
-    market.updateStocks(C,1);
-    timeDB.addSnapshot(market,time(NULL));
-    sleep(1);
-    market.updateStocks(D,1);
-    timeDB.addSnapshot(market,time(NULL));
-    vector<StockSnapshot> stockHistory = timeDB.getStockRecord(timeDB.getFirstTime()+1, timeDB.getLastTime()-1, "XYZ");
-    */
+    getConfiguration(apiCnfg);
+    //displayConfig(apiCnfg);
+    Query query = makeStockQuery("ABC", 15, 30);
+    //getStockData(apiCnfg, query, timeDB, market);
+    useFakeData(apiCnfg, query, timeDB, market);
 
-    /*cout << "market: " << &market << endl;
+    vector<StockSnapshot> stockHistory = timeDB.getStockRecord(timeDB.getFirstTime(), timeDB.getLastTime(), "ABC");
+    //displayStockRecord(stockHistory);
+    //displayStockRecTimes(stockHistory);
+
     
-    Position testPositions[1] = {Position(testMarket[0], 2.0, &market, "buy", time(NULL))};
-    Account testAccounts[1] = {Account(testPositions, 1, 100.00, "John")};
-    
+    market.updateStocks(timeDB.getAllSnapshots()[0].market);
+    cout << "updated market to 0" << endl;
+
+    Position testPositions[0] = {};
+    Account testAccounts[1] = {Account(testPositions, 0, 1000.00, "John")};
     User testUser(testAccounts,1);
     cliPurchase(&market,testUser);
-    market.updateStocks(newMarket,2);
+    
+    market.updateStocks(timeDB.getAllSnapshots()[10].market);
     displayStocks(market);
-    return 0;*/
+    
+    return 0;
 }
 
+Query makeStockQuery(string symbol, int interval /*minutes*/, int numVals){
+    return Query{
+            "/time_series?symbol=" + symbol + 
+            ",EUR/USD,IXIC&interval=" + to_string(interval) +
+            "min&outputsize=" + to_string(numVals) + 
+            "&apikey=",
+            symbol,
+            numVals
+        };
+}
 
-void getStockData(ApiConfig config, string symbol, int interval /*minutes*/){
-    CURL *curl;
-    CURLcode res;
-    string url = config.domain + "/time_series?symbol=" + symbol + ",EUR/USD,IXIC&interval=" + to_string(interval) + "min&apikey=" + config.key;
-    cout << "url: " << url << endl;
-    curl = curl_easy_init();
-    if(curl) {
-        curl_easy_setopt(curl, CURLOPT_URL, url.c_str());
-        res = curl_easy_perform(curl);
-        cout <<  "res: " << res << endl;
-        curl_easy_cleanup(curl);
+void getStockData(ApiConfig config, Query query, TimeDB &timeDB, Market &market){
+    cout <<  "called get stock data symbol: " << query.symbol  << endl;
+    string url = config.domain + query.queryString + config.key;
+
+    Response res = curlWrap(url);
+    json data = json::parse(res.body);
+    //cout << data << endl;
+    for(int i =query.vals-1; i >= 0; i--){ 
+        //cout << "getting price and time" << endl;
+        std::string price = data[query.symbol]["values"][i]["close"];
+        std::string time_details = data[query.symbol]["values"][i]["datetime"];
+
+        //cout << i   << ". price: " << price << " time: " << data[symbol]["values"][i]["datetime"] << endl;
+        
+        market.addStock(Stock(query.symbol, stof(price)));
+        //cout << "added stock to market: " << market << endl;
+
+        //parsing time string to time
+        struct tm tm;
+        strptime(time_details.c_str(), "%Y-%m-%d %H:%M:%S", &tm);
+        time_t t = mktime(&tm);
+
+        timeDB.addSnapshot(market,t);
     }
+    cout <<  "finished loading stock data" << endl;
 }
 
 void getConfiguration(ApiConfig &config){
@@ -98,9 +99,7 @@ void getConfiguration(ApiConfig &config){
     }
 }
 
-
-
-void getApiData(ApiConfig config){
+void displayConfig(ApiConfig config){
     cout << "key: " <<config.key << endl;
     cout << "domain: " << config.domain << endl;
 }
@@ -121,4 +120,30 @@ void cliPurchase(Market* market, User &user){
     cout << "how many shares would you like?: ";
     cin >> shares;
     user.purchasePosition(market->getStocks()[choice - 1], market, shares);
+}
+
+void useFakeData(ApiConfig config, Query query, TimeDB &timeDB, Market &market){
+    cout <<  "using fake data to preserve credits"  << endl;
+    ifstream file;
+    file.open("test.txt");
+    json data = json::parse(file);
+    //cout << data << endl;
+    for(int i =query.vals-1; i >= 0; i--){ 
+        //cout << "getting price and time" << endl;
+        std::string price = data[query.symbol]["values"][i]["close"];
+        std::string time_details = data[query.symbol]["values"][i]["datetime"];
+
+        //cout << i   << ". price: " << price << " time: " << data[symbol]["values"][i]["datetime"] << endl;
+        
+        market.addStock(Stock(query.symbol, stof(price)));
+        //cout << "added stock to market: " << market << endl;
+
+        //parsing time string to time
+        struct tm tm;
+        strptime(time_details.c_str(), "%Y-%m-%d %H:%M:%S", &tm);
+        time_t t = mktime(&tm);
+
+        timeDB.addSnapshot(market,t);
+    }
+    cout <<  "finished loading fake stock data" << endl;
 }

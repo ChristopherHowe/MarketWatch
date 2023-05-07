@@ -5,7 +5,6 @@
 #include <ctime>
 #include "market.h"
 
-using namespace std;
 
 class Position : public Stock {
     float originalPricePerShare;

@@ -7,17 +7,17 @@ using namespace std;
 
 class Stock {
     protected:
-    string symbol;
+    std::string symbol;
     float price;
 
     public:
     Stock();
-    Stock(string, float);
+    Stock( std::string, float);
 
-    string getSymbol();
+    std::string getSymbol();
     float getPrice();
 
-    void setSymbol(string);
+    void setSymbol(std::string);
     void setPrice(float);
     friend ostream & operator << (ostream & out, const Stock &s);
 };

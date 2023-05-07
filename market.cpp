@@ -33,12 +33,16 @@ void Market::addStock(Stock newStock){
     for(int i = 0; i < numStocks; i++){
         if (newStock.getSymbol() == stocks[i].getSymbol()){
             stocks[i].setPrice(newStock.getPrice());
+            return;
         }
-        else{
-            stocks[numStocks] = newStock;
-            numStocks++;
-        }
-   }
+    }
+    stocks.push_back(newStock);
+    numStocks++;
+}
+
+void Market::updateStocks(const Market &rhs){
+    stocks = rhs.stocks;
+    numStocks = rhs.numStocks;
 }
 
 void Market::updateStocks(Stock* newStocks, int newNumStocks){

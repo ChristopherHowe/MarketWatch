@@ -2,6 +2,7 @@
 #define TIME_SERIES_H
 #include "market.h"
 #include <ctime>
+#include "libstructs.h"
 
 struct MarketSnapshot{
     Market market;
@@ -11,7 +12,11 @@ struct MarketSnapshot{
 struct StockSnapshot{
     Stock stock;
     time_t timestamp;
+    friend ostream & operator << (ostream & out, const StockSnapshot& s);
 };
+
+void displayStockRecord(vector<StockSnapshot> v);
+void displayStockRecTimes(vector<StockSnapshot> v);
 
 class TimeDB{
     vector<Market> marketSnaps;

@@ -61,6 +61,8 @@ void Position::setDate(time_t newDate){
     date = newDate;
 }
 
+//don't want to use this since position updates its value based on market and calls to getCPPS
+//needs a little more work
 /*ostream & operator << (ostream & out, const Position& p){
     out << "{\"symbol\": " << p.symbol
         << ", \"CPPS\": " << p.

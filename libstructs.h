@@ -2,38 +2,44 @@
 #define LIB_STRUCTS_H
 
 #include <iostream>
-using namespace std;
+#include <cstring>
+#include <ctime>
+#include <curl/curl.h>
 
 struct ApiConfig {
-    string domain;
-    string key;
+    std::string domain;
+    std::string key;
 };
-// https://curl.se/libcurl/c/getinmemory.html
-struct MemoryStruct {
-  char *memory;
-  size_t size;
+
+struct Query {
+  std::string queryString;
+  std::string symbol;
+  int vals;
 };
- 
-static size_t
-WriteMemoryCallback(void *contents, size_t size, size_t nmemb, void *userp)
-{
-  size_t realsize = size * nmemb;
-  struct MemoryStruct *mem = (struct MemoryStruct *)userp;
- 
-  char *ptr = realloc(mem->memory, mem->size + realsize + 1);
-  if(!ptr) {
-    /* out of memory! */
-    printf("not enough memory (realloc returned NULL)\n");
-    return 0;
-  }
- 
-  mem->memory = ptr;
-  memcpy(&(mem->memory[mem->size]), contents, realsize);
-  mem->size += realsize;
-  mem->memory[mem->size] = 0;
- 
-  return realsize;
-}
+
+struct Response{
+  std::string body;
+  long status;
+};
+
+//https://stackoverflow.com/questions/2329571/c-libcurl-get-output-into-a-string
+
+struct bString {
+  char *ptr;
+  size_t len;
+};
+
+void init_string(struct bString *s);
+
+size_t writefunc(void *ptr, size_t size, size_t nmemb, struct bString *s);
 
 
+// end citation
+
+
+//This wrapper function makes libcurl something I can understand after working with js and python
+// Syntax is from libcurl documentation
+Response curlWrap(std::string url);
+
+std::string time_tToStr(time_t time);
 #endif
