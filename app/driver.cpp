@@ -2,14 +2,7 @@
 #include <unistd.h>
 #include <cstdlib>
 #include "library.h"
-#include "json.hpp"
 #include <fstream>
-
-
-
-
-using json = nlohmann::json;
-
 
 
 void displayStocks(Market);
@@ -20,9 +13,6 @@ void getStockData(ApiConfig config, Query query, TimeDB &timeDB, Market &market)
 Query makeStockQuery(string symbol, int interval /*minutes*/, int numVals);
 void useFakeData(ApiConfig config, Query query, TimeDB &timeDB, Market &market);
 
-
-
-
 int main(){ 
     
      
@@ -31,23 +21,28 @@ int main(){
     TimeDB timeDB;
     Market market;
 
-    Position testPositions[0] = {};
-    Account testAccounts[1] = {Account(testPositions, 0, 1000.00, "John")};
+     //displayConfig(apiCnfg);
+    Query query = makeStockQuery("ABC", 15, 30);
+    //getStockData(apiCnfg, query, timeDB, market);
+    useFakeData(apiCnfg, query, timeDB, market);
+
+    cout << "initializing time" << endl;
+    time_t now = 0;
+    cout << "initialized time" << endl;
+    Position testPositions[1] = {Position(market.getStock(0), 1, &market,"BUY", now)};
+    Account testAccounts[1] = {Account(testPositions, 1, 1000.00, "John")};
     User testUser(testAccounts,1);
     User* userArray[MAX_USERS] = {&testUser};
     int numUsers = 1;
 
-    System system = fillSystem(&market, &timeDB, userArray, numUsers 0);
+    System system = fillSystem(&market, &timeDB, userArray, numUsers, 0);
 
     
 
     getConfiguration(apiCnfg);
     cout << "started main" << endl;
 
-    //displayConfig(apiCnfg);
-    Query query = makeStockQuery("ABC", 15, 30);
-    //getStockData(apiCnfg, query, timeDB, market);
-    useFakeData(apiCnfg, query, timeDB, market);
+   
 
     vector<StockSnapshot> stockHistory = timeDB.getStockRecord(timeDB.getFirstTime(), timeDB.getLastTime(), "ABC");
     //displayStockRecord(stockHistory);
@@ -122,7 +117,7 @@ void displayConfig(ApiConfig config){
 void displayStocks(Market market){
     cout<< "available stocks:" << endl;
     for(int i = 0; i < market.getNumStocks(); i++){
-        cout << i + 1 << ".  symbol: " << market.getStocks()[i].getSymbol() << " " << "price: " << market.getStocks()[i].getPrice() << endl;
+        cout << i + 1 << ".  symbol: " << market.getStock(i).getSymbol() << " " << "price: " << market.getStock(i).getPrice() << endl;
     }
 }
 
@@ -134,7 +129,7 @@ void cliPurchase(Market* market, User &user){
     cin >> choice;
     cout << "how many shares would you like?: ";
     cin >> shares;
-    user.purchasePosition(market->getStocks()[choice - 1], market, shares);
+    user.purchasePosition(market->getStock(choice - 1), market, shares,"buy");
 }
 
 void useFakeData(ApiConfig config, Query query, TimeDB &timeDB, Market &market){

@@ -20,6 +20,7 @@ class User {
     Account* getAccounts();
     Account getAccount(int);
     Account getActiveAccount();
+    int getActiveInd();
     int getNumAccounts();
     float getBalance();
     
@@ -27,7 +28,7 @@ class User {
     void addAccount(Account);
     Account removeAccount(int accountIndex);
 
-    Position purchasePosition(Stock, Market*, float numShares);
+    bool purchasePosition(Stock, Market*, float numShares, string type);
     float sellPosition(int positionIndex);
 
     friend ostream & operator << (ostream & out, const User& u);

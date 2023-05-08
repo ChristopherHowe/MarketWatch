@@ -11,8 +11,11 @@ Market::Market(Stock newStocks[], int newNumStocks){
     numStocks = newNumStocks;
 }
 
-vector<Stock> Market::getStocks(){
-    return stocks;
+Stock Market::getStock(int index){
+    if(index >= numStocks){
+        throw runtime_error("index provided in get stock is higher than available index");
+    }
+    return stocks[index];
 }
 
 int Market::getNumStocks(){

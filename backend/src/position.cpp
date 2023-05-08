@@ -8,6 +8,7 @@ Position::Position(){
 }
 
 Position::Position(Stock newStock, float newNumShares, Market* newMarket, string newType, time_t newDate){
+    cout << "calling pos const" << endl;
     symbol = newStock.getSymbol();
     numShares = newNumShares;
     market = newMarket;
@@ -15,6 +16,7 @@ Position::Position(Stock newStock, float newNumShares, Market* newMarket, string
     originalPricePerShare = price;
     type = newType;
     date = newDate;
+    cout << "finished pos const" << endl;
 }
 
 float Position::getOPPS(){

@@ -13,7 +13,7 @@ class Market {
     Market();
     Market(Stock[], int);
 
-    vector<Stock> getStocks();
+    Stock getStock(int index);
     int getNumStocks();
     Stock getStockBySymbol(string);
 

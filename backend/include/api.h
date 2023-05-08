@@ -4,10 +4,15 @@
 #include <memory>
 #include <cstdlib>
 #include "appStructs.h"
+#include "json.hpp"
 
+using json = nlohmann::json;
 using namespace std;
 
 
 int hostAPI(System system);
-void get_method_handler( const shared_ptr< restbed::Session > session );
+void stocks_handler( const shared_ptr< restbed::Session > session );
+void user_handler( const shared_ptr< restbed::Session > session );
+
+
 #endif

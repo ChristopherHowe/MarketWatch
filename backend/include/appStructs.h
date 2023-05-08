@@ -13,6 +13,6 @@ struct System{
   int activeUser;
 };
 
-System fillSystem(Market* market, TimeDB *timeDB, User **userArray, int numUsers);
+System fillSystem(Market* market, TimeDB *timeDB, User **userArray, int numUsers, int activeUser);
 
 #endif

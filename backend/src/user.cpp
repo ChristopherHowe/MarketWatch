@@ -6,12 +6,13 @@ void User::changeActiveAccount(int AccountIndex){
     }
 }
 
-Position User::purchasePosition(Stock stock, Market* market, float numShares){
+bool User::purchasePosition(Stock stock, Market* market, float numShares, string type){
+    cout << "called purchase position" << endl;
     Position newPosition(
         stock,
         numShares, 
         market,
-        "buy",
+        type,
         time(NULL));
     //cout << "created position" << endl;
     //cout << "activeAccount: " << activeAccount << endl;
@@ -23,9 +24,10 @@ Position User::purchasePosition(Stock stock, Market* market, float numShares){
         //cout << "in purchase position accounts[activeAccount]: " << &accounts[activeAccount]<< endl; 
         accounts[activeAccount].addPosition(newPosition);
         accounts[activeAccount].setCash(c - p);
-        return newPosition;
+        cout << "successfully purchased position" << endl;
+        return true;
     }
-    throw runtime_error("could not purchase position, insufficent funds");
+    return false;
 } 
 
 float User::sellPosition(int positionIndex){
@@ -57,6 +59,9 @@ Account* User::getAccounts(){
 }
 Account User::getAccount(int index){
     return accounts[index];
+}
+int User::getActiveInd(){
+    return activeAccount;
 }
 
 Account User::getActiveAccount(){
