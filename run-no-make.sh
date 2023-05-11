@@ -1,5 +1,4 @@
-cd build
-source ../env.sh
+source ./env.sh
 
 if [ -z $TWELVE_KEY ]; 
     then
@@ -14,4 +13,4 @@ if [ -z $API_DOMAIN ];
     exit
 fi
 
-app/marketwatch
+./marketwatch
