@@ -1,3 +1,7 @@
+/*******************************
+Author: Christopher Howe
+Purpose: Includes implimentation for the stock class
+********************************/
 #include "stock.h"
 
 ostream & operator << (ostream & out, const Stock &s){

@@ -1,3 +1,9 @@
+/*******************************
+Author: Christopher Howe
+Purpose: contains low level structs and functions to organize application
+also has implimentation libcurl in a way I am kinda familiar with
+********************************/
+
 #ifndef LIB_STRUCTS_H
 #define LIB_STRUCTS_H
 

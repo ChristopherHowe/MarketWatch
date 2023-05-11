@@ -1,3 +1,7 @@
+/*******************************
+Author: Christopher Howe
+Purpose: Includes implimentation for the user class
+********************************/
 #include "user.h"
 
 void User::changeActiveAccount(int AccountIndex){
@@ -14,14 +18,10 @@ bool User::purchasePosition(Stock stock, Market* market, float numShares, string
         market,
         type,
         time(NULL));
-    //cout << "created position" << endl;
-    //cout << "activeAccount: " << activeAccount << endl;
     float c = accounts[activeAccount].getCash();
-    //cout << "got cash" << endl;
     float p = newPosition.getValue();
     cout << "got position value: " << p << endl;
     if (c >= p){
-        //cout << "in purchase position accounts[activeAccount]: " << &accounts[activeAccount]<< endl; 
         accounts[activeAccount].addPosition(newPosition);
         accounts[activeAccount].setCash(c - p);
         cout << "successfully purchased position" << endl;
@@ -74,11 +74,8 @@ int User::getNumAccounts(){
 
 float User::getBalance(){
     float balance=0;
-    //cout << "starting getBalance" << endl;
     for(int i = 0; i < numAccounts; i++){
-        //cout << "in getBalance accounts[i]:" << &accounts[i]<< endl;
         balance += accounts[i].getAccountValue();
-        //cout << "adding to balance: " << accounts[i].getAccountValue() << endl;
     }
     return balance;
 }

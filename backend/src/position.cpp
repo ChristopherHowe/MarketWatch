@@ -1,3 +1,7 @@
+/*******************************
+Author: Christopher Howe
+Purpose: Includes implimentation for the position class
+********************************/
 #include "position.h"
 
 Position::Position(){

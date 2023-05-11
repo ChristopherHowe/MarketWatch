@@ -1,3 +1,7 @@
+/*******************************
+Author: Christopher Howe
+Purpose: includes implimentation for the appstructs library
+********************************/
 #include "appStructs.h"
 
 

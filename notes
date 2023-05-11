@@ -16,3 +16,9 @@ alpha vantage, provides good data, free for 500 req/day 5/main
 
 key for twelve data is in personal and passport
 https://support.twelvedata.com/en/articles/5214728-getting-historical-data how to specify time stamps for data
+
+restbed documentation
+https://github.com/Corvusoft/restbed
+
+Nolan Json documention
+https://github.com/nlohmann/json

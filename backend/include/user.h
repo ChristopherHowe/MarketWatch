@@ -1,3 +1,9 @@
+/*******************************
+Author: Christopher Howe
+Purpose: Defines the user class, users are the designed way for
+entities to interact with the system.
+********************************/
+
 #ifndef USER_H
 #define USER_H
 

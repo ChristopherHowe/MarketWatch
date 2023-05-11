@@ -1,3 +1,9 @@
+/*******************************
+Author: Christopher Howe
+Purpose: Defines a position class which should essentially be
+essentailly everything you need for basic position transactions
+********************************/
+
 #ifndef POSITION_H
 #define POSITION_H
 

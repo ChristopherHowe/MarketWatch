@@ -1,3 +1,9 @@
+/*******************************
+Author: Christopher Howe
+Purpose: Creates and manages a time series data base to store stock market 
+data and respond to it
+********************************/
+
 #ifndef TIME_SERIES_H
 #define TIME_SERIES_H
 #include "market.h"

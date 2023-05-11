@@ -1,3 +1,7 @@
+/*******************************
+Author: Christopher Howe
+Purpose: Includes implimentation for the TimeDB class
+********************************/
 #include "timeSeriesDB.h"
 
 TimeDB::TimeDB(){
@@ -59,16 +63,10 @@ time_t TimeDB::getLastTime(){
 }
 
 bool TimeDB::addSnapshot(Market market, time_t time){
-    //code for converting time_t to something easy to read
-    
-
     string timeString = time_tToStr(time);
-    //cout << "add snap: market: " << market << "time: " << timeString << endl;
     if(snapTimes.size() > 0){
         if(time < snapTimes.back()){
-            //THIS ISSUE STILL NEEDS TO BE FIXED, FIRST TIME NOT COMING IN RIGHT
-            //cout << "time: " << time << " last time: " << snapTimes.back() << endl;
-            //throw runtime_error("while adding snapshot snap time is less than last time");
+            throw runtime_error("while adding snapshot snap time is less than last time");
         }
     }
     marketSnaps.push_back(market);

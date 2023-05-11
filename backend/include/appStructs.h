@@ -1,3 +1,9 @@
+/*******************************
+Author: Christopher Howe
+Purpose: Contains functions and structures that relatively high level
+ie they interact with the structures I have created.
+********************************/
+
 #ifndef APP_STRUCTS_H
 #define APP_STRUCTS_H
 

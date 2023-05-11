@@ -1,3 +1,7 @@
+/*******************************
+Author: Christopher Howe
+Purpose: Includes implimentation for the account class
+********************************/
 #include "account.h"
 
 void Account::refreshAccount(){
@@ -8,7 +12,6 @@ float Account::getPositionTotal(){
     float total = 0;
     for (int i = 0; i < numPositions; i++){
         total += positions[i].getValue();
-        //cout << i<< ". value: " << positions[i].getValue() << endl;
     }
     return total;
 }

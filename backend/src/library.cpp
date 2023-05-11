@@ -1,3 +1,7 @@
+/*******************************
+Author: Christopher Howe
+Purpose: includes implimentation for the base library
+********************************/
 #include "library.h"
 
 void init_string(struct bString *s) {

@@ -1,3 +1,7 @@
+/*******************************
+Author: Christopher Howe
+Purpose: Includes implimentation for the market class
+********************************/
 #include "market.h"
 
 Market::Market(){

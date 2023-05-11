@@ -1,3 +1,9 @@
+/*******************************
+Author: Christopher Howe
+Purpose: Defines the market class, a market is a snapshot of time of the market.
+in the future this solution might change.
+********************************/
+
 #ifndef MARKET_H
 #define MARKET_H
 

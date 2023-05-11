@@ -1,3 +1,9 @@
+/*******************************
+Author: Christopher Howe
+Purpose: Accounts store all of the assets under an owner,
+a single user can control multiple accounts. The account class is more of a
+sublevel of the user class
+********************************/
 #ifndef ACCOUNT_H
 #define ACCOUNT_H
 

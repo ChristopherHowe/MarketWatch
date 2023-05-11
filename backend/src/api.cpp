@@ -1,3 +1,7 @@
+/*******************************
+Author: Christopher Howe
+Purpose: includes implimentation for the api class
+********************************/
 #include "api.h"
 
 System globSystem;

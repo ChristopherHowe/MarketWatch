@@ -1,3 +1,7 @@
+/*******************************
+Author: Christopher Howe
+Purpose: Defines a simple stock class
+********************************/
 #ifndef STOCK_H
 #define STOCK_H
 
